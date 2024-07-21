@@ -23,8 +23,15 @@ SECRET_KEY = 'django-insecure-w%5-gu+^3wnz!n7-m8$a_^np=d23v^i1#)+pv79tnh-c9e%q-%
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
+# If DEBUG = False it does not load static files
+# With python manage.py runserver --insecure it loads static files also
+# IF DEBUG = False ALLOWED_HOST must not be empty
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 # Application definition
 

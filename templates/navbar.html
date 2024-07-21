@@ -3,9 +3,9 @@
     <div class="container">
         <div class="logo">
             <!-- Link to Home Page -->
-            <a href="{% url 'index' %}"><img width="50px" 
-                                             src="{% static '/images/free-30-instagram-stories-icons23_122570.png' %}"
-                                             alt="img1"></a>
+            <a href="{% url 'index' %}">
+                <img width="50px" src="{% static '/images/free-30-instagram-stories-icons23_122570.png' %}"
+                     alt="img1"></a>
             <!-- Link to Home Page -->
             <a class="home" href="#"><i>Petstagram</i></a>
         </div>
@@ -22,12 +22,13 @@
 {#                {% if request.user.is_authenticated %}#}
                                 <li class="nav-item">
                     <!-- Link to Profile Page -->
+
 {#                    <a href="{% url 'profile-details' pk=request.user.pk %}"><i>{{ request.user.username }}</i></a>#}
 {#                    <a href="{% url 'logout'%}"><i>Logout</i></a>#}
-                    <form action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit"><a>Logout</a></button>
-                    </form>
+{#                    <form action="{% url 'logout' %}" method="post">#}
+{#                        {% csrf_token %}#}
+{#                        <button type="submit"><a>Logout</a></button>#}
+{#                    </form>#}
                 </li>
 {#                {% else %}#}
                 <li class="nav-item">
