@@ -5,7 +5,7 @@ from .models import Pet
 # FORM use when getting data not related to model ( note create model instance)
 # MODEL FORM use when getting data related to model ( create model instance)
 
-class PetAddForm(forms.ModelForm):
+class BaseForm(forms.ModelForm):
     class Meta:
         model = Pet
         field = '__all__'  # or [field1, ....]
@@ -22,9 +22,19 @@ class PetAddForm(forms.ModelForm):
             'date_of_birth': "Date of birth",
         }
 
-class PetEditForm(forms.ModelForm):
+
+class PetAddForm(BaseForm):
     pass
 
 
-class PetDeleteForm(forms.ModelForm):
+class PetEditForm(BaseForm):
     pass
+
+
+class PetDeleteForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for (_, field) in self.fields.items():
+            field.widget.attrs['disabled'] = 'disabled'
+            field.widget.attrs['readonly'] = 'readonly'

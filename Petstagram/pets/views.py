@@ -29,8 +29,28 @@ def pet_details(request, username, pet_name):
 
 
 def edit_pet(request, username, pet_name):
-    return render(request, 'pets/pet-edit-page.html')
+    pet = Pet.objects.filter(slug=pet_name).first()
+
+    if request.method == 'GET':
+        form = PetEditForm(instance=pet, initial=pet.__dict__)
+    else:
+        form = PetEditForm(request.POST, instance=pet)
+        if form.is_valid():
+            form.save()
+            return redirect('pet_details', username, pet_name)
+    context = {"form": form, 'pet_name': pet_name, 'username': username}
+    return render(request, 'pets/pet-edit-page.html', context=context)
 
 
 def delete_pet(request, username, pet_name):
-    return render(request, 'pets/pet-delete-page.html')
+    pet = Pet.objects.filter(slug=pet_name).first()
+    form = PetDeleteForm(instance=pet)
+    if request.method == 'POST':
+        form = PetDeleteForm(request.POST, instance=pet)
+        if form.is_valid():
+            pet.delete()
+            return redirect('profile-details', pk=1)
+    context = {'form': form, 'pet_name': pet_name, 'username': username }
+
+    return render(request, 'pets/pet-delete-page.html', context=context)
+

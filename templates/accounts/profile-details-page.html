@@ -2,7 +2,6 @@
 {% load static %}
 {% block main_content %}
     <div class="profile">
-
         <!-- Start Profile Personal Data Section -->
         <div class="profile-data">
             <div class="profile_img">
@@ -58,32 +57,31 @@
         <div class="pets">
             <div class="statuses">
                 {% for pet in pets %}
-                <a href="#">
-                    <div class="head-pet">
-                        <div class="status">
-                            <div class="image">
-                                <!-- Pet Image -->
-                                <img src=""
-                                     alt="pet img">
+                    <a href="#">
+                        <div class="head-pet">
+                            <div class="status">
+                                <div class="image">
+                                    <!-- Pet Image -->
+                                    <img src=""
+                                         alt="pet img">
+                                </div>
                             </div>
+                            <p>{{ pet.name }}</p>
                         </div>
-                        <p>{{ pet.name }}</p>
-                    </div>
-                </a>
-{% endfor %}
-            
-        <!-- End Pets Data Section -->
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
 
-        <!-- Start Last Uploaded Photos Section -->
         <div class="pet-photos">
-
             {% for pet in pets %}
-            <a href="#">
-                <!-- Pet Photo -->
-                <img src="https://i.natgeofe.com/n/de94c416-6d23-45f5-9708-e8d56289268e/naturepl_01132178.jpg?w=636&h=631"
-                     alt={{ pet.name }}>
-            </a>
+                <a href="{% url 'pet_details' username="hardcoded" pet_name=pet.slug %}">
+                    <!-- Pet Photo -->
+                    <img src="https://i.natgeofe.com/n/de94c416-6d23-45f5-9708-e8d56289268e/naturepl_01132178.jpg?w=636&h=631"
+                         alt={{ pet.name }}>
+                </a>
             {% endfor %}
+        </div>
 
     </div>
 {% endblock %}
