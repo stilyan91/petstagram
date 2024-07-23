@@ -40,7 +40,7 @@
                     <!-- End User Details and Image Location -->
 
                     <div class="imgBx" id="{{ photo.pk }}">
-                        <img src="{% static 'images/axolotl.jpeg' %}" alt="post" class="cover">
+                        <img src="{{ photo.photo.url }}" alt="post" class="cover">
                     </div>
 
 

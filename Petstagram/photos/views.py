@@ -1,11 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from Petstagram.common.models import Like
 from Petstagram.photos.models import Photo
-
+from .forms import PhotoCreateForm
 
 def photo_add(request):
-    return render(request, 'photo/photo-add-page.html')
+    form = PhotoCreateForm
+    if request.method == 'POST':
+        form = PhotoCreateForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    context = {'form': form}
+    return render(request, 'photo/photo-add-page.html', context=context)
 
 
 def photo_details(request, pk):

@@ -8,7 +8,7 @@ from .validators import validate_file_size
 class Photo(models.Model):
     photo = models.ImageField(
         validators=[validate_file_size],
-        upload_to='mediafiles/photos')
+        upload_to='images')
     description = models.TextField(blank=True, null=True, max_length=300, validators=[MinLengthValidator(10)])
     location = models.CharField(max_length=30)
     tagged_pets = models.ManyToManyField(Pet, blank=True)
