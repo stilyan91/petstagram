@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 
 from Petstagram.common.models import Like
 from Petstagram.photos.models import Photo
-from .forms import PhotoCreateForm
+from .forms import PhotoCreateForm, PhotoEditForm
+
 
 def photo_add(request):
     form = PhotoCreateForm
@@ -26,4 +27,15 @@ def photo_details(request, pk):
 
 
 def photo_edit(request, pk):
-    return render(request, 'photo/photo-edit-page.html')
+    photo = Photo.objects.filter(pk=pk).first()
+    form = PhotoEditForm(request.POST, instance=photo)
+    if form.is_valid():
+        form.save()
+        return redirect('photo_details', pk)
+    context = {'form': form, "pk": pk }
+    return render(request, 'photo/photo-edit-page.html',context=context)
+
+def photo_delete(request, pk):
+    photo = Photo.objects.filter(pk=pk).first()
+    photo.delete()
+    return redirect('index')
